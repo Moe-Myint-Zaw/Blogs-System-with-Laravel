@@ -21,25 +21,24 @@ class Blog
 
 
     public static function all(){
-        $files=File::files(resource_path("blogs"));
-        $blogs=[];
-        foreach($files as $file){
+        return collect(File::files(resource_path("blogs")))->map(function($file){
             $obj=YamlFrontMatter::parseFile($file);
-            $blog=new blog($obj->title, $obj->slug, $obj->intro, $obj->body());
-            $blogs[]=$blog;
-        }
-        return ($blogs);
+            return new blog($obj->title, $obj->slug, $obj->intro, $obj->body());
+        });
     }
     
     
     public static function find($slug){
-        $path=resource_path("blogs/$slug.html");
-   if(!file_exists($path)){
-    return redirect('/');
-   }
-    return $blog=cache()->remember("posts.$slug",120,function()use ($path){
-        return file_get_contents($path);
-    });
+        $blogs = static::all();
+        return $blogs->firstWhere('slug',$slug);
+
+//         $path=resource_path("blogs/$slug.html");
+//    if(!file_exists($path)){
+//     return redirect('/');
+//    }
+//     return $blog=cache()->remember("posts.$slug",120,function()use ($path){
+//         return file_get_contents($path);
+//     });
     }
 }
 
