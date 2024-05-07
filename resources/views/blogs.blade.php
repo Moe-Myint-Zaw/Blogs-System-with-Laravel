@@ -6,13 +6,24 @@
     <title>Blogs System</title>
     <link rel="stylesheet" href="/css/app.css">
 </head>
+<style>
+    .bg-blue{
+        background-color:lightblue;
+    }
+</style>
 <body>
-  <?php foreach($blogs as $blog): ?>
-    <h1><a href="blogs/<?= $blog->slug; ?>"><?= $blog->title; ?></a></h1>
+    @if(true)
+        This is conditional content.
+    
+    @endif
+  @foreach($blogs as $blog) 
+  <div class="{{ $loop->even ? "bg-blue" : ""}}">
+  <h1><a href="blogs/{{ $blog->slug; }}">{{$blog->title; }}</a></h1>
     <div>
-        <p>Published at : <?= $blog->date; ?>
-        <p><?= $blog->intro; ?></p>
+        <p>Published at : {{ $blog->date; }}
+        <p>{{ $blog->intro; }}</p>
     </div>
-    <?php endforeach; ?>
+  </div>
+    @endforeach;
 </body>
 </html>
