@@ -12,33 +12,27 @@ class Blog
     public $slug;
     public $intro;
     public $body;
-    public function __construct($title, $slug, $intro, $body){
+    public $date;
+    public function __construct($title, $slug, $intro, $body,$date){
         $this->title=$title;
         $this->slug=$slug;
         $this->intro=$intro;
         $this->body=$body;
+        $this->date=$date;
     }
 
 
     public static function all(){
         return collect(File::files(resource_path("blogs")))->map(function($file){
             $obj=YamlFrontMatter::parseFile($file);
-            return new blog($obj->title, $obj->slug, $obj->intro, $obj->body());
-        });
+            return new blog($obj->title, $obj->slug, $obj->intro, $obj->body(),$obj->date);
+        })->sortByDesc('date');
     }
     
     
     public static function find($slug){
         $blogs = static::all();
         return $blogs->firstWhere('slug',$slug);
-
-//         $path=resource_path("blogs/$slug.html");
-//    if(!file_exists($path)){
-//     return redirect('/');
-//    }
-//     return $blog=cache()->remember("posts.$slug",120,function()use ($path){
-//         return file_get_contents($path);
-//     });
     }
 }
 
