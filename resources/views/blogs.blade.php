@@ -1,9 +1,8 @@
-@extends('layout')
-@section('content')
-@if(true)
-        This is conditional content.
-    
-    @endif
+<x-layout>
+  <x-slot name="title">
+    <title>Blogs</title>
+  </x-slot>
+ 
   @foreach($blogs as $blog) 
   <div class="{{ $loop->even ? "bg-blue" : ""}}">
   <h1><a href="blogs/{{ $blog->slug; }}">{{$blog->title; }}</a></h1>
@@ -12,8 +11,11 @@
         <p>{{ $blog->intro; }}</p>
     </div>
   </div>
-    @endforeach;
-@endsection
+    @endforeach
+  
+</x-layout>
+ 
+
     
     
     
