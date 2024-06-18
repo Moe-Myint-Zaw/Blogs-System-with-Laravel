@@ -25,6 +25,5 @@ class DatabaseSeeder extends Seeder
 
         Blog::factory(2)->create(['category_id'=>$frontend->id]);
         Blog::factory(2)->create(['category_id'=>$backend->id]);
-        
     }
 }
