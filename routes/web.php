@@ -1,28 +1,13 @@
 <?php
-
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Blog;
 use App\Models\User;
 use App\Models\Category;
 
-Route::get('/', function () {
-    $blogs=Blog::latest();
-    if(request('search')){
-        $blog=$blogs->where('title','LIKE','%'.request('search').'%');
-    }
-    return view('blogs',[
-        'blogs'=>$blogs->get(),
-        'categories'=>Category::all()
-    ]);
-});
+Route::get('/',[BlogController::class,'index']);
 
-Route::get('/blogs/{blog:slug}', function (Blog $blog) {
-    
-    return view('blog',[
-        'blog'=>$blog,
-        'randomBlogs'=>Blog::inRandomOrder()->take(3)->get()
-    ]);
-})->where('blog','[A-z\d\-_]+');
+Route::get('/blogs/{blog:slug}',[BlogController::class,'show'])->where('blog','[A-z\d\-_]+');
 Route::get('/users/{user:username}', function (User $user) {
     
      return view('blogs',[
