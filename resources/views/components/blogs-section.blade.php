@@ -29,11 +29,12 @@
         </div>
     </div>
     <form
-        action=""
+        action="/"
         class="my-3"
     >
         <div class="input-group mb-3">
             <input
+                name="search"
                 type="text"
                 autocomplete="false"
                 class="form-control"
