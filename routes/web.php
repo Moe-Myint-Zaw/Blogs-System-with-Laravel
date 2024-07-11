@@ -15,14 +15,7 @@ Route::get('/users/{user:username}', function (User $user) {
         'categories'=>Category::all(),
     ]);
 });
-Route::get('/categories/{category:slug}', function (Category $category) {
-    
-    return view('blogs',[
-       'blogs'=>$category->blogs,
-       'categories'=>Category::all(),
-       'currentCategory'=>$category 
-   ]);
-});
+
     
 
 
