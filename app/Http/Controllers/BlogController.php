@@ -9,7 +9,9 @@ class BlogController extends Controller
     public function index(){
         
     return view('blogs',[
-        'blogs'=>Blog::latest()->filter(request(['search','category','username']))->paginate(6),
+        'blogs'=>Blog::latest()->filter(request(['search','category','username']))
+                                    ->simplePaginate(6)
+                                        ->withQueryString()
     ]);
     }
 
