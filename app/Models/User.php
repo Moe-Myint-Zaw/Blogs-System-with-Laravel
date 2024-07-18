@@ -36,13 +36,16 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'email_verified_at' => 'datetime'
         ];
     }
 
     public function blogs()
     {
         return $this->hasMany(Blog::class);
+    }
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password']=bcrypt($value);
     }
 }

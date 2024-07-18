@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 class AuthController extends Controller
 {
     public function create(){
-        return view('register.create');
+        return view('auth.register');
     }
 
     public function store(){
@@ -20,8 +20,38 @@ class AuthController extends Controller
             'username'=>['required','max:255','min:3',Rule::unique('users', 'username')],
             'password'=>['required','min:8']
         ]);
-        User::create($formData);
+        $user=User::create($formData);
+        auth()->login($user);
+        return redirect('/')->with('success','Welcome Dear '.$user->name);
+    }
 
-        return redirect('/');
+    public function logout(){
+        auth()->logout();
+        return redirect('/')->with('success','Good Bye');
+    }
+
+    public function login(){
+        return view('auth.login');
+    }
+
+    public function post_login()
+    {
+        //validation
+        $formData=request()->validate([
+            'email'=>['required','email','max:255',Rule::exists('users', 'email')],
+            'password'=>['required','min:8','max:255']
+        ], [
+            'email.required'=>'We need your email address.',
+            'password.min'=>'Password should be more than 8 characters.'
+        ]);
+        //if user credentials correct -> redirect home
+        if(auth()->attempt( $formData)){
+            return redirect('/')->with('success','Welcome back');
+        //if user credentials fail -> redirect back to form with error
+        }else{
+            return redirect()->back()->withErrors([
+                'email'=>'User Credential Wrong'
+            ]);
+        }
     }
 }
