@@ -9,7 +9,6 @@ use App\Models\Comment;
 class Blog extends Model
 {
     use HasFactory;
-    protected $guarded=[];
     protected $with=['category','author'];
 
     public function scopeFilter($query,$filter){
