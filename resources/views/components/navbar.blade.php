@@ -44,10 +44,6 @@
             >Logout</button>
         </form>
         @endauth 
-            <a
-                href="#subscribe"
-                class="nav-link"
-            >Subscribe</a>
         </div>
     </div>
 </nav>

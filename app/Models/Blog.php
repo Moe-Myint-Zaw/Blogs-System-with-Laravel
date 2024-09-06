@@ -45,5 +45,10 @@ class Blog extends Model
     public function comments()
         {
                 return $this->hasMany(Comment::class);
-        }   
+        }  
+    public function subscribers()
+    {
+        return $this->belongsToMany(User::class);
+    }
+        
 }
