@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Blog;
 use App\Models\User;
 use App\Models\Category;
+use App\Http\Middleware\MustBeAdmin;
 
 Route::get('/',[BlogController::class,'index']);
 
@@ -20,6 +21,10 @@ Route::get('/login',[AuthController::class,'login'])->middleware('guest');
 Route::post('/login',[AuthController::class,'post_login'])->middleware('guest');
 
 Route::post('/blogs/{blog:slug}/subscription', [BlogController::class,'subscriptionHandler']);
+
+//Admin routes
+
+Route::get('/admin/blogs/create', [BlogController::class,'create'])->middleware(MustBeAdmin::class);
 
 
     
