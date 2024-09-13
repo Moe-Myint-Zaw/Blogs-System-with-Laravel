@@ -25,6 +25,8 @@ Route::post('/blogs/{blog:slug}/subscription', [BlogController::class,'subscript
 //Admin routes
 
 Route::get('/admin/blogs/create', [BlogController::class,'create'])->middleware(MustBeAdmin::class);
+Route::post('/admin/blogs/store', [BlogController::class,'store'])->middleware(MustBeAdmin::class);
+
 
 
     
