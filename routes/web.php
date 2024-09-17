@@ -29,7 +29,7 @@ Route::get('/admin/blogs', [AdminBlogController::class, 'index'])->middleware(Mu
 Route::get('/admin/blogs/create', [AdminBlogController::class, 'create'])->middleware(MustBeAdmin::class);
 Route::post('/admin/blogs/store', [AdminBlogController::class, 'store'])->middleware(MustBeAdmin::class);
 Route::delete('/admin/blogs/{blog:slug}/delete', [AdminBlogController::class, 'destroy'])->middleware(MustBeAdmin::class);
-
+Route::get('/admin/blogs/{blog:slug}/edit', [AdminBlogController::class, 'edit'])->middleware(MustBeAdmin::class);
 
 
 

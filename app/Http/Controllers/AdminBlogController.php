@@ -17,7 +17,7 @@ class AdminBlogController extends Controller
 
     public function create()
     {
-        return view('blogs.create',[
+        return view('admin.blogs.create',[
             'categories'=>Category::all()
         ]);
     }
@@ -40,5 +40,12 @@ class AdminBlogController extends Controller
     {
         $blog->delete();
         return back()->with('deleted','Blog was deleted permanantly');
+    }
+    public function edit(Blog $blog)
+    {
+        return view('admin.blogs.edit',[
+            'blog'=>$blog,
+            'categories'=>Category::all()
+        ]);
     }
 }
