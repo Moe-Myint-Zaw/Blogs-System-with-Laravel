@@ -46,7 +46,11 @@ class AuthController extends Controller
         ]);
         //if user credentials correct -> redirect home
         if(auth()->attempt( $formData)){
-            return redirect('/')->with('success','Welcome back');
+            if(auth()->user()->is_admin){
+                return redirect('/admin/blogs')->with('success','Welcome back, Admin');
+           }else{
+                return redirect('/')->with('success','Welcome back');
+            }
         //if user credentials fail -> redirect back to form with error
         }else{
             return redirect()->back()->withErrors([
@@ -54,4 +58,5 @@ class AuthController extends Controller
             ]);
         }
     }
+
 }

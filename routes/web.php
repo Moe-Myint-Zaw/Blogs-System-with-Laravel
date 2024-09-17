@@ -28,6 +28,8 @@ Route::post('/blogs/{blog:slug}/subscription', [BlogController::class,'subscript
 Route::get('/admin/blogs', [AdminBlogController::class, 'index'])->middleware(MustBeAdmin::class);
 Route::get('/admin/blogs/create', [AdminBlogController::class, 'create'])->middleware(MustBeAdmin::class);
 Route::post('/admin/blogs/store', [AdminBlogController::class, 'store'])->middleware(MustBeAdmin::class);
+Route::delete('/admin/blogs/{blog:slug}/delete', [AdminBlogController::class, 'destroy'])->middleware(MustBeAdmin::class);
+
 
 
 
