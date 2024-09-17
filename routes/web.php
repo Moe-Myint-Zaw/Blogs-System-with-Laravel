@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
@@ -24,8 +25,9 @@ Route::post('/blogs/{blog:slug}/subscription', [BlogController::class,'subscript
 
 //Admin routes
 
-Route::get('/admin/blogs/create', [BlogController::class,'create'])->middleware(MustBeAdmin::class);
-Route::post('/admin/blogs/store', [BlogController::class,'store'])->middleware(MustBeAdmin::class);
+Route::get('/admin/blogs', [AdminBlogController::class, 'index'])->middleware(MustBeAdmin::class);
+Route::get('/admin/blogs/create', [AdminBlogController::class, 'create'])->middleware(MustBeAdmin::class);
+Route::post('/admin/blogs/store', [AdminBlogController::class, 'store'])->middleware(MustBeAdmin::class);
 
 
 
