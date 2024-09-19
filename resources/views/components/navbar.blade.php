@@ -10,6 +10,12 @@
                 href="/#blogs"
                 class="nav-link"
             >Blogs</a>
+        @can('admin')
+        <a 
+                href="/admin/blogs"
+                class="nav-link"
+                >Dashboard</a>
+        @endcan
         @auth
             <img
                 src="{{auth()->user()->avatar}}"
